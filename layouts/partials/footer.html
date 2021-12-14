@@ -1,0 +1,17 @@
+{{ $productPathData := findRE "[^/]+.*?" .RelPermalink }}
+{{ $product := index $productPathData 0 }}
+{{ $currentVersion := index $productPathData 1 | default "v2.0"}}
+
+  <!-- InfluxDB URL modal -->
+  {{ partial "footer/influxdb-url-modal.html" . }}
+  <!-- {{ partial "footer/feature-callout.html" . }} -->
+
+  <!-- Docsearch JS -->
+  {{ partial "footer/search.html" . }}
+
+  <!-- Docs Notifications -->
+  {{ partial "footer/notifications.html" . }}
+
+  </body>
+  {{ partial "footer/javascript.html" . }}
+</html>

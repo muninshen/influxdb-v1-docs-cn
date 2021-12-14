@@ -1,0 +1,5 @@
+Start building sites … 
+ERROR 2021/12/09 12:09:00 Failed to read Git log: fatal: not a git repository (or any of the parent directories): .git
+WARN 2021/12/09 12:09:22 "C:\Users\Daniel\git\influxdb\influxdb-v1-docs-cn\content\influxdb\v1.8\troubleshooting\_index.md:1:1": duplicate menu entry with identifier "错误信息" in menu "influxdb_1_8"
+Built in 40738 ms
+Error: Error building site: logged 1 error(s)

@@ -1,0 +1,38 @@
+////////////////////////// Guides Pagination Buttons /////////////////////////
+
+.page-nav-btns {
+  display: flex;
+  justify-content: space-between;
+  margin: 3rem 0 1rem;
+
+  .btn {
+    display: flex;
+    max-width: 49%;
+    text-align: center;
+    align-items: center;
+
+    &.prev{
+      margin: 0 auto 0 0;
+      padding: .75rem 1.25rem .75rem .75rem;
+      &:before {
+        content: "\e90a";
+        display: inline-block;
+        font-family: "icomoon";
+        margin-right: .5rem;
+        vertical-align: middle;
+      }
+    }
+    &.next {
+      margin: 0 0 0 auto;
+      padding: .75rem .75rem .75rem 1.25rem;
+      flex-direction: row-reverse;
+      &:before {
+        content: "\e90c";
+        display: inline-block;
+        font-family: "icomoon";
+        margin-left: .5rem;
+        vertical-align: middle;
+      }
+    }
+  }
+}

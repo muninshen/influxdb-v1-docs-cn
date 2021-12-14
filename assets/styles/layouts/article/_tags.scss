@@ -1,0 +1,33 @@
+//////////////////////////////////// Tags ////////////////////////////////////
+
+.tags {
+  border-top: 1px solid $article-hr;
+  padding-top: 1.75rem;
+  margin: 2rem 0 1rem;
+
+  .tag {
+    background: $body-bg;
+    margin: .12rem 0;
+    padding: .35rem .6rem;
+    font-style: italic;
+    font-weight: $medium;
+    color: rgba($article-text, .75) !important;
+    font-size: .8rem;
+    border-radius: 1rem;
+
+    &:after {
+      border-radius: 1rem;
+      @include gradient($grad-MilkyWay)
+    }
+
+    &:hover {
+      color: $g20-white !important;
+    }
+  }
+}
+
+.related + .tags {
+  border: none;
+  padding-top: 0;
+  margin: 1.5rem 0 1rem;
+}
