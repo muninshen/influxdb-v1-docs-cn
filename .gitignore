@@ -1,0 +1,8 @@
+.DS_Store
+*~
+public
+.*.swp
+node_modules
+*.log
+/resources
+/content/**/api.html

@@ -1,0 +1,14 @@
+{{ $productPathData := findRE "[^/]+.*?" .RelPermalink }}
+{{ $product := index $productPathData 0 }}
+{{ $currentVersion := index $productPathData 1 }}
+{{ $tagSet := print $product "/" $currentVersion "/tags" }}
+{{ if isset .Params $tagSet }}
+  <div class="tags">
+    {{ range .Param $tagSet }}
+      {{ $name := . }}
+      {{ with $.Site.GetPage (printf "/%s/%s" $tagSet ($name | urlize)) }}
+        <a class="tag btn" href="{{ .RelPermalink }}">{{ $name }}</a>
+      {{ end }}
+    {{ end }}
+  </div>
+{{ end }}

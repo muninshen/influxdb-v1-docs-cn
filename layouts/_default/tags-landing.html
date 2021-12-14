@@ -1,0 +1,29 @@
+{{ partial "header.html" . }}
+{{ partial "topnav.html" . }}
+
+<div class="page-wrapper">
+  {{ partial "sidebar.html" . }}
+  <div class="content-wrapper">
+    <div class="sidebar-toggle" onclick="toggle_sidebar('sidebar-open');return false;"><a href="#">&#59675;</a></div>
+
+    <div class="article">
+      <article class="article--content">
+        <h1>{{ .Title }}</h1>
+        <ul class="list-links">
+
+          {{ $productPathData := findRE "[^/]+.*?" .RelPermalink }}
+          {{ $product := index $productPathData 0 }}
+          {{ $currentVersion := index $productPathData 1 }}
+          {{ $tagSet := print $product "/" $currentVersion "/tags" }}
+          {{ range $key, $value := index .Site.Taxonomies $tagSet }}
+          	<li><a href="{{ $key | urlize  }}">{{ $key }}</a> ({{ len $value }})</li>
+          {{ end }}
+
+        </ul>
+      </article>
+    </div>
+
+  </div>
+</div>
+
+{{ partial "footer.html" . }}

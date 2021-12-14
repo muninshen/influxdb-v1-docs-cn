@@ -1,0 +1,13 @@
+{{ $currentVersion := (index (findRE "[^/]+.*?" .Page.RelPermalink) 0) }}
+{{ $functionsPath := print "/" $currentVersion "/reference/flux/functions" }}
+
+<ul>
+{{ range where $.Site.RegularPages.ByTitle "Section" $currentVersion }}
+  {{ if in .Title "() function"  }}
+    {{ $title := replaceRE `\ function` "" .Title }}
+    <li>
+      <a href="{{ .RelPermalink }}">{{ $title }}</a>
+    </li>
+  {{ end }}
+{{ end }}
+</ul>
