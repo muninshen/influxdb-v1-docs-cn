@@ -6,7 +6,7 @@ menu:
   influxdb_1_8:
     name: 错误信息
     weight: 30
-    parent: 故障检测
+    parent: 故障排除
 ---
 
 此页面记录了错误，它们的描述以及（如适用）常见的解决方案
