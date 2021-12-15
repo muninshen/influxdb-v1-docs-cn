@@ -6,7 +6,7 @@ menu:
   influxdb_1_8:
     name: 系统错误
     weight: 1
-    parent: 故障检测
+    parent: 故障排除
 ---
 
 使用systemd (Ubuntu, Debian, CentOS)运行Influxdb时，,可能会在 InfluxDB 日志中 (通过 `journalctl -u influxdb`) 遇到错误:例如

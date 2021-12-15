@@ -5,7 +5,7 @@ menu:
   influxdb_1_8:
     name: 查询管理
     weight: 20
-    parent: 故障检测
+    parent: 故障排除
 ---
 
 使用以下方法管理您的Influxdb查询:

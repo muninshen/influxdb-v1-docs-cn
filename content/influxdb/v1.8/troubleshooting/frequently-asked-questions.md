@@ -8,7 +8,7 @@ menu:
   influxdb_1_8:
     name: 常见问题 (FAQs)
     weight: 10
-    parent: 故障检测
+    parent: 故障排除
 ---
 
 该页面解决了常见的混乱来源以及InfluxDB相对于其他数据库系统表现出意外行为的地方。 在适用的情况下，它链接到GitHub上的未决问题。
