@@ -9,13 +9,13 @@ menu:
     parent: 管理
 ---
 
-Influxdb开源（OSS）配置文件包含特定的本地节点配置设置
+Influxdb开源（OSS）配置文件包含特定的本地节点配置设置。
 
-#### Content
+#### 内容
 
 * [配置概述](#configuration-overview)
 * [环境变量](#environment-variables)
-  * [InfluxDB 环境变量 (`INFLUXDB_*`)](#influxdb-environment-variables-influxdb)
+  * [InfluxDB 环境变量 (`INFLUXDB_*`)](#influxdb-environment-variables)
   * [`GOMAXPROCS` 环境变量](#gomaxprocs-environment-variable)
 * [使用配置文件](#using-the-configuration-file)
 * [配置设定](#configuration-settings)
@@ -29,13 +29,14 @@ Influxdb开源（OSS）配置文件包含特定的本地节点配置设置
   * [HTTP 端点 `[http]`](#http-endpoints-settings)
   * [Subscriptions订阅内容 `[subscriber]`](#subscription-settings)
   * [Graphite `[[graphite]]`](#graphite-settings)
-  * [CollectD `[[collectd]]`](#collectd-settings)
+  * [collectd `[[collectd]]`](#collectd-settings)
   * [OpenTSB `[[opentsdb]]`](#opentsdb-settings)
   * [UDP `[[udp]]`](#udp-settings)
   * [连续查询 `[continuous_queries]`](#continuous-queries-settings)
   * [TLS `[tls]`](#transport-layer-security-tls-settings)
 
-## 配置概述
+## Configuration overview
+配置概述
 
 使用配置文件（`inflxudb.conf`）和环境变量配置inflxudb，如果不取消注释配置选项，则系统将使用其默认设置，本文档中均为默认配置
 
@@ -52,22 +53,25 @@ Influxdb开源（OSS）配置文件包含特定的本地节点配置设置
 
 >**Note:** 此处记录了配置文件设置以获取最新的官方版本-GitHub上的`示列配置文`件可能会稍微更新
 
-## 环境变量
+## Environment variables
+环境变量
 
 可以在配置文件或者环境变量中指定配置文件中的所有配置设置，环境变量将覆盖配置文件中的等效设置，如果未在配置文件或环境变量中指定配置选项，则influxdb使用其内部默认配置
 
 > ***Note:*** 如果已经设置了环境变量，那么将忽略配置文件中的等效配置设置
 
-### InfluxDB 环境变量 (`INFLUXDB_*`)
+### InfluxDB environment variables
+InfluxDB 环境变量 (`INFLUXDB_*`)
 
-以下记录了InfluxDB环境变量以及相应的配置文件设置,所有特定的Influxdb环境变量都以`INFLUXDB_`为前缀
+以下记录了InfluxDB环境变量以及相应的配置文件设置，所有特定的InfluxDB环境变量都以`INFLUXDB_`为前缀。
 
-环境变量
+### GOMAXPROCS environment variable
+GOMAXPROCS环境变量
 
 > ***Note:*** GOMACPROCS环境变量不能像其他环境变量一样使用InfluxDB配置文件来设置。
 
-
-## 使用配置文件
+## Using the configuration file
+使用配置文件
 
 Influxdb系统具有配置文件中所有设置的内部默认值，要查看默认配置设置，请使用`inflxudb config`命令
 
@@ -96,8 +100,8 @@ Influxdb系统具有配置文件中所有设置的内部默认值，要查看默
 
 Influxdb首先检查-config选项,然后检查环境变量
 
-
-## 配置设定
+## Configuration settings
+配置设定
 
 > **Note:**
 > 要允许多个配置的config部分中设置或者覆盖设置`[[double_brackets]]`标题中具有任何部分都支持多个配置，必须以序号指定所需的配置，例如，对于一组`[[graphite]]`环境变量，在环境变量中的配置设置名称前加上相关的位置编号（在这种情况下：`0`)：
@@ -112,7 +116,8 @@ Influxdb首先检查-config选项,然后检查环境变量
 >对于配置文件中的第N个Graptite配置，相关的环境变量格式为 `INFLUXDB_GRAPHITE_(N-1)_BATCH_PENDING`.
 >对于配置文件每个部分，编号都是从零重新开始.
 
-## 全局设置
+## Global settings
+全局设置
 
 ### `reporting-disabled = false`
 
@@ -131,8 +136,8 @@ InfluxData 使用从运行中的Influxdb节点资源报告的数据来主要跟�
 ```
 环境变量： INFLUXDB_BIND_ADDRESS
 ```
-
-## Metastore 设置
+## Metastore settings
+Metastore 设置
 
 ### `[meta]`
 
@@ -160,7 +165,8 @@ InfluxData 使用从运行中的Influxdb节点资源报告的数据来主要跟�
 
 环境变量： `INFLUXDB_META_LOGGING_ENABLED`
 
-## 数据设置
+## Data settings
+数据设置
 
 ### `[data]`
 
@@ -212,8 +218,8 @@ TSM引擎存储TSM文件的Influxdb目录，此目录可能会更改
 
 验证传入的写操作以确保keys仅具有有效的Unicode字符.由于必须要检查每个密钥，因此此设置会产生少量的开销
 
-
-### TSM引擎的设置
+### Settings for the TSM engine
+TSM引擎的设置
 
 #### `cache-max-memory-size = "1g"`
 
@@ -269,7 +275,8 @@ TSM压缩每秒写入磁盘的最大字节数，默认值为`"48m"`(4800万)，�
 
 环境变量: `INFLUXDB_DATA_TSM_USE_MADV_WILLNEED`
 
-### 内存(`inmem`) 索引设置
+### In-memory (inmem) index settings
+内存(`inmem`) 索引设置
 
 #### `max-series-per-database = 1000000`
 
@@ -293,7 +300,8 @@ TSM压缩每秒写入磁盘的最大字节数，默认值为`"48m"`(4800万)，�
 
 环境变量: `INFLUXDB_DATA_MAX_VALUES_PER_TAG`
 
-### TSI (`tsi1`) 索引设置
+### TSI (tsi1) index settings
+TSI (`tsi1`) 索引设置
 
 #### `max-index-log-file-size = "1m"`
 
@@ -307,7 +315,8 @@ TSI索引中用于存储先前计算的series结果的内部缓存的大小。�
 
 环境变量: `INFLUXDB_DATA_SERIES_ID_SET_CACHE_SIZE`
 
-## 查询管理设置
+## Query management settings
+查询管理设置
 
 ### `[coordinator]`
 
@@ -358,7 +367,8 @@ TSI索引中用于存储先前计算的series结果的内部缓存的大小。�
 
 -----
 
-## Retention policy 设置
+## Retention policy settings
+Retention policy 设置
 
 ### `[retention]`
 
@@ -378,7 +388,8 @@ Influxdb检查以强制执行保留策略的时间间隔.
 
 -----
 
-## Shard 重建设置
+## Shard precreation settings
+Shard 重建设置
 
 ### `[shard-precreation]`
 
@@ -402,7 +413,8 @@ Influxdb为预先创建shards未来时间期限，30m默认值应该适用于大
 
 环境变量: `INFLUXDB_SHARD_PRECREATION_ADVANCE_PERIOD`
 
-## Monitoring 配置信息
+## Monitoring settings
+Monitoring 配置信息
 
 ### `[monitor]`
 
@@ -428,7 +440,8 @@ Influxdb记录统计信息的时间间隔，默认值为每十秒钟（10s）
 
 环境变量: `INFLUXDB_MONITOR_STORE_INTERVAL`
 
-## HTTP 端点设置
+## HTTP endpoints settings
+HTTP 端点设置
 
 ### `[http]`
 
@@ -638,7 +651,8 @@ Use the `[http.headers]` section to configure user-supplied HTTP response header
 
 -----
 
-## Logging 设定
+## Logging settings
+Logging 设定
 
 ### `[logging]`
 
@@ -664,7 +678,8 @@ Use the `[http.headers]` section to configure user-supplied HTTP response header
 
 -----
 
-## Subscription 设定
+## Subscription settings
+Subscription 设定
 
 ### `[subscriber]`
 
@@ -706,7 +721,8 @@ The number of in-flight writes buffered in the write channel.
 
 -----
 
-## Graphite 设置
+## Graphite settings
+Graphite 设置
 
 ### `[[graphite]]`
 
@@ -782,8 +798,8 @@ UDP读取缓冲区大小，0表示操作系统默认值，如果设置为OS max�
 
 
 -----
-
-## 收集的设置
+## collectd settings
+collectd设置
 
 ### `[[collectd]]`
 
@@ -861,6 +877,7 @@ UDP读取缓冲区大小，0表示操作系统默认值，如果设置OS max以�
 -----
 
 ## OpenTSDB settings
+OpenTSDB设置
 
 ### `[[opentsdb]]`
 
@@ -935,6 +952,7 @@ Log an error for every malformed point.
 -----
 
 ## UDP settings
+UDP设置
 
 ### `[[udp]]`
 
@@ -999,8 +1017,8 @@ UDP读取缓冲区大小，0表示操作系统默认值，如果设置为OS max�
 
 
 -----
-
-## 连续查询设置
+## Continuous queries settings
+连续查询设置
 
 ### `[continuous_queries]`
 
@@ -1031,8 +1049,8 @@ Influxdb检查是否需要运行CQ的时间间隔，将此选项设置为CQ运�
 环境变量: `INFLUXDB_CONTINUOUS_QUERIES_RUN_INTERVAL`
 
 -----
-
-## 传输层安全性（TSL）设置
+## Transport Layer Security (TLS) settings
+传输层安全性（TSL）设置
 
 ### `[tls]`
 

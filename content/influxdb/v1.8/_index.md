@@ -7,25 +7,17 @@ menu:
 weight: 1
 ---
 
-InfluxDB is a [time series database](https://www.influxdata.com/time-series-database/) designed to handle high write and query loads.
-It is an integral component of the
-[TICK stack](https://influxdata.com/time-series-platform/).
-InfluxDB is meant to be used as a backing store for any use case involving large amounts of timestamped data, including DevOps monitoring, application metrics, IoT sensor data, and real-time analytics.
+InfluxDB是一个时间序列数据库，旨在处理高写入和查询负载。1.X版本中，它是TICK堆栈的组成部分 。InfluxDB旨在用作涉及大量带时间戳数据的任何用例的存储方案，包括DevOps监控，应用程序指标，物联网传感器数据和实时分析。
 
-## Key features
+## 主要特性
+以下是InfluxDB目前支持的一些功能，使其成为处理时间序列数据的绝佳选择：
+* 专为时间序列数据量身定制的高性能数据存储。TSM存储引擎提供数据高速读写和压缩等功能。
+* 完全基于Go语言编写，无需外部依赖，可直接编译成一份可执行的二进制文件。
+* 简单高效的HTTP API写入和查询接口。
+* 丰富的插件可支持诸如Graphite、collectd和OpenTSDB等数据接入协议。
+* 针对时序数据，量身订造类似SQL的查询语言，轻松查询聚合数据。
+* 允许对tag建索引，实现快速有效的查询。
+* 数据保留策略能够有效地使旧数据自动失效。
+* 连续查询可自动计算聚合数据，以提高频繁查询的效率。
 
-Here are some of the features that InfluxDB currently supports that make it a great choice for working with time series data.
-
-* Custom high performance datastore written specifically for time series data.
-The TSM engine allows for high ingest speed and data compression
-* Written entirely in Go.
-It compiles into a single binary with no external dependencies.
-* Simple, high performing write and query HTTP APIs.
-* Plugins support for other data ingestion protocols such as Graphite, collectd, and OpenTSDB.
-* Expressive SQL-like query language tailored to easily query aggregated data.
-* Tags allow series to be indexed for fast and efficient queries.
-* Retention policies efficiently auto-expire stale data.
-* Continuous queries automatically compute aggregate data to make frequent queries more efficient.
-
-The open source edition of InfluxDB runs on a single node.
-If you require high availability to eliminate a single point of failure, consider the [InfluxDB Enterprise Edition](/{{< latest "enterprise_influxdb" "v1" >}}/high_availability/).
+InfluxDB的开源版本在单个节点上运行。如果您需要高可用性来消除单点故障，请考虑InfluxDB企业版。
