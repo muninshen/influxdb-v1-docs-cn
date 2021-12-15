@@ -1,6 +1,6 @@
 ---
-title: 安装 InfluxDB OSS
-description: Install, start, and configure InfluxDB OSS.
+title: 安装InfluxDB开源（OSS）版本
+description: 安装、启动并配置InfluxDB开源（OSS）版本。
 menu:
   influxdb_1_8:
     name: 安装
@@ -23,7 +23,7 @@ aliases:
 - TCP 端口`8086`：用于客户端-服务端的InfluxDB API通信
 - TCP 端口`8088`：用于RPC服务执行备份和还原操作
 
-除上述端口外，InfluxDB还提供了多个插件，这些插件可能需要[自定义端口](/influxdb/v1.8/administration/ports/)。可以通过[配置文件]修改所有端口映射，该文件位于默认安装位置`/etc/influxdb/influxdb.conf`。
+除上述端口外，InfluxDB还提供了多个插件，这些插件可能需要[自定义端口](/influxdb/v1.8/administration/ports/)。可以通过[配置文件](/influxdb/v1.8/administration/config/)修改所有端口映射，该文件位于默认安装位置`/etc/influxdb/influxdb.conf`。
 
 ### 网络时间协议 (NTP)
 
@@ -48,7 +48,7 @@ InfluxDB 使用UTC中主机的本地时间为数据分配时间戳。网络时�
 
 Debian和Ubuntu用户可以使用`apt-get`软件管理程序安装InfluxDB的最新稳定版本
 
-对于Ubuntu用户，使用以下命令添加InfluxData存储库
+对于Ubuntu用户，使用以下命令添加InfluxData的仓库:
 
 {{< code-tabs-wrapper >}}
 {{% code-tabs %}}
@@ -72,7 +72,7 @@ echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stabl
 {{% /code-tab-content %}}
 {{< /code-tabs-wrapper >}}
 
-对于Debian用户, 添加InfluxData 存储库:
+对于Debian用户，使用以下命令添加InfluxData的仓库:
 
 {{< code-tabs-wrapper >}}
 {{% code-tabs %}}
@@ -97,14 +97,14 @@ echo "deb https://repos.influxdata.com/debian $(lsb_release -cs) stable" | sudo 
 {{< /code-tabs-wrapper >}}
 
 
-然后,安装并启动InfluxDB服务:
+然后，安装并启动InfluxDB服务:
 
 ```bash
 sudo apt-get update && sudo apt-get install influxdb
 sudo service influxdb start
 ```
 
-或如果您的操作系统使用systemd (Ubuntu 15.04+, Debian 8+):
+或如果您的操作系统可以使用systemd (Ubuntu 15.04+, Debian 8+)，也可以这样启动：
 
 ```bash
 sudo apt-get update && sudo apt-get install influxdb
@@ -118,7 +118,7 @@ sudo systemctl start influxdb
 
 有关如何从文件安装RPM软件包的说明，请查看 [下载页面](https://influxdata.com/downloads/).
 
-Red Hat and CentOS 用户可以使用`yum`软件包管理器来安装InfluxDB的最新稳定版本：
+Red Hat 和 CentOS 用户可以使用`yum`软件包管理器来安装InfluxDB的最新稳定版本：
 
 ```bash
 cat <<EOF | sudo tee /etc/yum.repos.d/influxdb.repo
@@ -138,7 +138,7 @@ sudo yum install influxdb
 sudo service influxdb start
 ```
 
-或如果您的操作系统使用的是systemd (CentOS 7+, RHEL 7+)：
+或如果您的操作系统可以使用systemd (CentOS 7+, RHEL 7+)，也可以这样启动：
 
 ```bash
 sudo yum install influxdb
@@ -190,19 +190,19 @@ brew update
 brew install influxdb
 ```
 
-如果在登陆时 `launchd` 启动InfluxDB， 请运行：
+登录后用 `launchd`开始运行InfluxDB之前， 请先运行：
 
 ```bash
 ln -sfv /usr/local/opt/influxdb/*.plist ~/Library/LaunchAgents
 ```
 
-立即启动InfluxDB， 请运行：
+然后启动InfluxDB：
 
 ```bash
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.influxdb.plist
 ```
 
-如果您不想使用launchctl,，则可以在单独的终端运行：
+如果您不想使用launchctl，那可以在单独的终端运行：
 
 ```bash
 influxd -config /usr/local/etc/influxdb.conf
@@ -211,11 +211,11 @@ influxd -config /usr/local/etc/influxdb.conf
 {{% /tab-content %}}
 {{< /tabs-wrapper >}}
 
-### 验证下载的二进制文件的真实性 (可选)
+### 校验下载的二进制文件的完整性（可选）
 
 为了提高安全性，请按照以下步骤使用`gpg`验证InfluxDB下载的签名。
 
-（大多数操作系统默认都包含`gpg`命令，如果`gpg`不可用，请参考[GnuPG homepage](https://gnupg.org/download/)以获得安装说明）
+（大多数操作系统默认都包含`gpg`命令，如果`gpg`不可用，请参考[GnuPG主页](https://gnupg.org/download/)以获得安装说明）。
 
 1. 下载并导入InfluxData的public key：
     ```
@@ -224,12 +224,12 @@ influxd -config /usr/local/etc/influxdb.conf
 
 2. 通过在下载URL中添加`.asc`，下载发布的签名文件。例如：
     ```
-    wget https://dl.influxdata.com/influxdb/releases/influxdb-1.8.3_linux_amd64.tar.gz.asc
+    wget https://dl.influxdata.com/influxdb/releases/influxdb-1.8.10_linux_amd64.tar.gz.asc
     ```
 
 3. 使用命令`gpg --verify`验证签名文件：
     ```
-    gpg --verify influxdb-1.8.3_linux_amd64.tar.gz.asc influxdb-1.8.3_linux_amd64.tar.gz
+    gpg --verify influxdb-1.8.10_linux_amd64.tar.gz.asc influxdb-1.8.10_linux_amd64.tar.gz
     ```
     该命令的输出应包括以下内容：
     ```
@@ -263,27 +263,27 @@ InfluxDB首先检查`-config`，然后检查环境变量。
 
 有关更多信息，请参见 [配置](/influxdb/v1.8/administration/config/)文档。
 
-### Data and WAL 目录权限
+### Data 和 WAL 目录权限
 
-确保运行`influxd`服务的用户具有数据存储目录`data`和[预写日志目录](/influxdb/v1.8/concepts/glossary#wal-write-ahead-log) (WAL) 的读写权限。
+首先确保运行`influxd`服务的用户具有数据存储目录`data`和[预写式日志目录](/influxdb/v1.8/concepts/glossary#wal-write-ahead-log) (WAL) 的读写权限。
 
 > **注意:** 如果data和wal目录不可写，则`influxd`服务将不会启动。
 
-有关`data` 和`wal` 目录的信息，可在[InfluxDB配置](/influxdb/v1.8/administration/config/)的[Data settings](/influxdb/v1.8/administration/config/#data-settings)文档中找到。
+有关`data` 和`wal` 目录的信息，可在[InfluxDB配置](/influxdb/v1.8/administration/config/)的[数据 设置](/influxdb/v1.8/administration/config/#data-settings)文档中找到。
 
 ## 在AWS上托管InfluxDB OSS
 
 ### InfluxDB的硬件要求
 
-我们建议使用两个SSD，一个用于`influxdb/wal`，另一个用户`influxdb/data`。根据您的负载，每个SSD应该具有大约1k ~ 3k 的IPOS。`influxdb/wal`需要的空间较少，但是IOPS要求高。`influxdb/data`需要空间较多，与前者比IOPS要求较低。
+我们建议使用两个SSD卷，一个用于`influxdb/wal`，另一个用于`influxdb/data`。根据您的负载，每个SSD应该具有大约1k ~ 3k 的IOPS。`influxdb/wal`需要的空间较少，但是IOPS要求高。`influxdb/data`需要空间较多，与前者比IOPS要求较低。
 
-每台机器最少需要8GB RAM。
+每台机器应该有不少于8G的内存。
 
-我们已经看到R4类机器的最佳性能，因为它们比C3 / C4类和M4类提供的内存更多。
+在AWS上的R4型号的机器上的我们看到了最好的性能，因为这种型号的机器提供的内存比C3/C4和M4型号机器大得多。
 
 ### 配置 InfluxDB OSS 实例
 
-本示例假定您已经正在使用两个SSD，并且已经正确安装了它们，此示例还假定两个SSD安装在 `/mnt/influx`和`/mnt/db`，有关如何执行此操作的更多信息，请参考Amazon文档[将券添加到实例](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html).
+本示例假定您已经正在使用两个SSD卷，并且已经正确安装了它们，此示例还假定两个SSD安装在 `/mnt/influx`和`/mnt/db`，有关如何执行此操作的更多信息，请参考Amazon文档[将卷添加到实例](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html)。
 
 ### 配置文件
 
@@ -324,7 +324,7 @@ chown influxdb:influxdb /mnt/influx
 chown influxdb:influxdb /mnt/db
 ```
 
-对于InfluxDB1.7.6或更高版本，您必须授予所有者对`init.sh`文件的权限，为此，请在`influxdb`目录中运行以下脚本：
+对于InfluxDB 1.7.6或更高版本，您必须授予所有者对`init.sh`文件的权限，为此，请在`influxdb`目录中运行以下脚本：
 
 ```sh
 if [ ! -f "$STDOUT" ]; then

@@ -9,4 +9,4 @@ aliases:
   - /influxdb/v1.8/introduction/downloading/
 ---
 
-从以下位置下载最新的InfluxDB开源（OSS）版本： [InfluxData下载页面](https://portal.influxdata.com/downloads)。
+从以下位置下载最新的InfluxDB开源（OSS）版本： [InfluxData下载页面](https://portal.influxdata.com/downloads/)。
