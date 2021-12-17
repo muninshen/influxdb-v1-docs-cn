@@ -1,7 +1,6 @@
 ---
 title: TSI 概述
-description: >
-  The Time Series Index (TSI) storage engine supports high cardinality in time series data.
+description: InfluxDB实现了基于磁盘的倒排索引-Time Series Index (TSI)。
 menu:
   influxdb_1_8:
     name: TSI 概述

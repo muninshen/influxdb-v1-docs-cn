@@ -1,7 +1,6 @@
 ---
 title: 模式设计和数据布局
-description: >
-  General guidelines for InfluxDB schema design and data layout.
+description: InfluxDB时间序列数据结构的概述及其如何影响性能。
 menu:
   influxdb_1_8:
     name: 模式设计和数据布局

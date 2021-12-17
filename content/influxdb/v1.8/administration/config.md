@@ -176,7 +176,7 @@ Metastore 设置
 
 TSM引擎存储TSM文件的Influxdb目录，此目录可能会更改
 
->**Note:** 对于MACOS安装，默认的WAL目录为 `/Users/<username>/.influxdb/data`.
+>**Note:** 对于macOS安装，默认的WAL目录为 `/Users/<username>/.influxdb/data`.
 
 环境变量: `INFLUXDB_DATA_DIR`
 
@@ -184,7 +184,7 @@ TSM引擎存储TSM文件的Influxdb目录，此目录可能会更改
 
 预写日志（WAL）文件的目录位置.
 
->**Note:** 对于MACOS安装，默认的WAL目录为 `/Users/<username>/.influxdb/wal`.
+>**Note:** 对于macOS安装，默认的WAL目录为 `/Users/<username>/.influxdb/wal`.
 
 环境变量 `INFLUXDB_DATA_WAL_DIR`
 

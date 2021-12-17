@@ -10,7 +10,6 @@
 > **参考:**
 本文档基于最新稳定版的InfluxDB v1.8版本的官方手册进行翻译。
 
-
 1. **下载并安装Hugo**
 
     下载地址：https://github.com/gohugoio/hugo/releases/tag/v0.75.0 根据操作系统，下载前缀为“hugo_extended_0.75.0”的压缩文件。
@@ -25,7 +24,7 @@
 
 3. **启动Hugo服务**
 
-    Linux/MacOS:
+    Linux/macOS:
     ```
     $ cd 至该repo根目录
     $ ./server_start

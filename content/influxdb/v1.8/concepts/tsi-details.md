@@ -1,6 +1,6 @@
 ---
 title: TSI 详解
-description: Enable and understand the Time Series Index (TSI).
+description: InfluxDB实现了基于磁盘的倒排索引-Time Series Index (TSI)及其详解。
 menu:
   influxdb_1_8:
     name: TSI 详解

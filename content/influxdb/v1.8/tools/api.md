@@ -691,10 +691,10 @@ POST http://localhost:8086/write
 | :--------------------- | :---------------- | :---------- |
 | consistency=[any,one,quorum,all] | 可选，仅适用于 [InfluxDB 企业集群](/enterprise_influxdb/v1.6/)。 | 设置写入一致性，如果未指定，则使用`one`，有关一致性的详细说明，请参阅[InfluxDB企业文档](/enterprise_influxdb/v1.6/concepts/clustering#write-consistency) |
 | db=\<database> | 可选                                                         | 设置写入的目标[数据库](/influxdb/v1.8/concepts/glossary/#database) |
-| p=\<password> | 如果没有 [启用身份认证](/influxdb/v1.8/administration/authentication_and_authorization/#set-up-authentication)则为可选，如果启用了身份认证，则为必需。 | 如果开启了认证，请设置用于认证的密码。需要与参数`u`同时使用。 |
+| p=\<password> | 如果没有 [启用身份验证](/influxdb/v1.8/administration/authentication_and_authorization/#set-up-authentication)则为可选，如果启用了身份验证，则为必需。 | 如果开启了认证，请设置用于认证的密码。需要与参数`u`同时使用。 |
 | precision=[ns,u,ms,s,m,h] | 可选 | 设置所提供的Unix时间的精度。如果您不指定精度，InfluxDB假设时间戳的精度为纳秒。 |
 | rp=\<retention_policy_name> | 可选 | 设置写入的目标[保留策略](/influxdb/v1.8/concepts/glossary/#retention-policy-rp)。如果您不指定，InfluxDB会将数据写入默认(`DEFAULT`)保留策略。 |
-| u=\<username> | 如果没有 [启用身份认证](/influxdb/v1.8/administration/authentication_and_authorization/#set-up-authentication)则为可选，如果启用了身份认证，则为必需。 | 如果开启了认证，请设置用于认证的用户名。用户必须具有写数据库的权限。需要与参数`p`同时使用。 |
+| u=\<username> | 如果没有 [启用身份验证](/influxdb/v1.8/administration/authentication_and_authorization/#set-up-authentication)则为可选，如果启用了身份验证，则为必需。 | 如果开启了认证，请设置用于认证的用户名。用户必须具有写数据库的权限。需要与参数`p`同时使用。 |
 
 \* The InfluxDB API 还支持基本身份验证，如果您已[启用身份验证](/influxdb/v1.8/administration/authentication_and_authorization/#set-up-authentication) 并且未使用字符串参数`u`和`p`，请参阅下面的基本身份验证[示例](#write-a-point-to-the-database-mydb-using-basic-authentication) 
 

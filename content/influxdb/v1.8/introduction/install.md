@@ -239,7 +239,7 @@ influxd -config /usr/local/etc/influxdb.conf
 
 系统对配置文件每个参数都有内部默认值，使用`influxd config` 命令查看默认配置参数。
 
-> **注意：** 如果将InfluxDB部署在可公开访问的端点上，我们强烈建议启用身份验证。否则，任何未经授权的用户都可以公开获得数据。默认设置不启用身份验证和授权。此外，不应该仅依靠身份验证和授权来防止访问并保护数据免受恶意行为者的侵害。如果需要其他安全或合规性功能，则InfluxDB应该第三方服务之后运行，查看[身份验证和授权](/influxdb/v1.8/administration/authentication_and_authorization/)设置。
+> **注意：** 如果将InfluxDB部署在可公开访问的端点上，我们强烈建议启用身份验证。否则，任何未经授权的用户都可以公开获得数据。默认设置不启用身份验证与授权。此外，不应该仅依靠身份验证与授权来防止访问并保护数据免受恶意行为者的侵害。如果需要其他安全或合规性功能，则InfluxDB应该第三方服务之后运行，查看[身份验证与授权](/influxdb/v1.8/administration/authentication_and_authorization/)设置。
 
 本地配置文件(`/etc/influxdb/influxdb.conf`) 中大多数配置都已经被注释掉；所有注释掉的配置将由内部默认配置决定。本地配置文件中所有未注释的设置将覆盖内部默认值。请注意，本地配置文件不需要包含每个配置。
 
@@ -312,8 +312,8 @@ dir = "/mnt/db/hh"
     ...
 ```
 
-### 认证与授权
-对于所有AWS部署，我们强烈建议启用身份验证。否则，任何未经授权的用户都可以公开获得数据。默认设置不启用身份验证和授权。此外，不应该仅依靠身份验证和授权来防止访问并保护数据免受恶意行为者的侵害。如果需要其他安全或合规性功能，应该在AWS提供的其他服务之后运行运行InfluxDB，查看[身份验证和授权](/influxdb/v1.8/administration/authentication_and_authorization/) 设置。
+### 身份验证与授权
+对于所有AWS部署，我们强烈建议启用身份验证。否则，任何未经授权的用户都可以公开获得数据。默认设置不启用身份验证与授权。此外，不应该仅依靠身份验证与授权来防止访问并保护数据免受恶意行为者的侵害。如果需要其他安全或合规性功能，应该在AWS提供的其他服务之后运行运行InfluxDB，查看[身份验证与授权](/influxdb/v1.8/administration/authentication_and_authorization/) 设置。
 
 ### InfluxDB OSS 权限
 

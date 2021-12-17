@@ -123,7 +123,7 @@ ERR: error parsing query: found timeseries4dayz, expected string at line 1, char
 
 请注意.对请求进行身份验证时不应该包含单引号；
 
-**资源:**[身份验证和授权](/influxdb/v1.8/administration/authentication_and_authorization/)
+**资源:**[身份验证与授权](/influxdb/v1.8/administration/authentication_and_authorization/)
 
 ## `error parsing query: mixing aggregate and non-aggregate queries is not supported`
 

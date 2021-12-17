@@ -1,7 +1,6 @@
 ---
 title: TSM（InfluxDB 底层数据存储格式）
-description: >
-  InfluxDB storage engine, in-memory indexing, and the Time-Structured Merge Tree (TSM) in InfluxDB OSS.
+description: 概述下InfluxDB是如何将数据存储在磁盘上。
 menu:
   influxdb_1_8:
     name: TSM 概述
