@@ -39,10 +39,10 @@ menu:
 
 [InfluxQL数学运算符](/influxdb/v1.8/query_language/math_operators/) 涵盖了InfluxQL中数学运算符的使用。
 
-#### 认证与授权
+#### 身份验证与授权
 
-[身份认证与授权](/influxdb/v1.8/administration/authentication_and_authorization/)涵盖了如何在InfluxDB中
-[设置身份认证](/influxdb/v1.8/administration/authentication_and_authorization/#set-up-authentication)以及如何对请求进行身份认证，此页面还描述了不同的[用户类型](/influxdb/v1.8/administration/authentication_and_authorization/#user-types-and-privileges)以及[管理数据库用户](/influxdb/v1.8/administration/authentication_and_authorization/#user-management-commands)的InfluxQL。
+[身份验证与授权](/influxdb/v1.8/administration/authentication_and_authorization/)涵盖了如何在InfluxDB中
+[设置身份验证](/influxdb/v1.8/administration/authentication_and_authorization/#set-up-authentication)以及如何对请求进行身份验证，此页面还描述了不同的[用户类型](/influxdb/v1.8/administration/authentication_and_authorization/#user-types-and-privileges)以及[管理数据库用户](/influxdb/v1.8/administration/authentication_and_authorization/#user-management-commands)的InfluxQL。
 
 ## InfluxQL参考
 

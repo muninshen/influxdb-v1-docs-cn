@@ -1,6 +1,6 @@
 ---
 title: InfluxDB 专业术语
-description: Terms related to InfluxDB OSS.
+description: 列出InfluxDB的术语及其定义。
 menu:
   influxdb_1_8:
     name: 专业术语
@@ -10,31 +10,31 @@ menu:
 
 ## aggregation
 
-聚合，一个InfluxQL函数，能够返回一组数据点的聚合结果。想要获得现有的和即将支持的聚合函数的完整列表，请查看文档[InfluxQL函数](/influxdb/v1.8/query_language/functions/#aggregations)。
+聚合，指任意一个InfluxQL函数，能够返回一组数据点的聚合结果。想要获得现有的和即将支持的聚合函数的完整列表，请查看文档[InfluxQL函数](/influxdb/v1.8/query_language/functions/#aggregations)。
 
 相关术语： [function](/influxdb/v1.8/concepts/glossary/#function), [selector](/influxdb/v1.8/concepts/glossary/#selector), [transformation](/influxdb/v1.8/concepts/glossary/#transformation)
 
 ## batch
 
-批量，一个InfluxQL查询，在数据库中自动地、周期性地运行。连续查询要求在`SELECT`子句中有一个函数（function），并且必须包含一个`GROUP BY time()`子句。
+批量数据，指用换行符(`0x0A`)分割的数据点的集合。这批数据可以使用HTTP请求写到数据库中。用这种HTTP接口的方式可以大幅降低HTTP的负载。尽管不同的场景下更小或更大的batch可能有更好地性能，建议每个batch的大小在5000~10000个数据点。
 
 相关术语: [InfluxDB line protocol](/influxdb/v1.8/concepts/glossary/#influxdb-line-protocol), [point](/influxdb/v1.8/concepts/glossary/#point)
 
 ## bucket
 
-桶，存储桶是时间序列数据存储在InfluxDB 2.0中的命名位置。 在InfluxDB 1.8+中，数据库和保留策略（database/retention-policy）的每种组合都代表一个存储桶。 使用InfluxDB 1.8+附带的[InfluxDB 2.0 API兼容性端点](/influxdb/v1.8/tools/api#influxdb-2-0-api-compatibility-endpoints)与存储桶进行交互。
+桶，即存储桶是时间序列数据存储在InfluxDB 2.0中的位置。在InfluxDB 1.8+中，数据库和保留策略（database/retention-policy）的每种组合都代表一个存储桶。可以使用InfluxDB 1.8+附带的[InfluxDB 2.0 API兼容性端点](/influxdb/v1.8/tools/api#influxdb-2-0-api-compatibility-endpoints)与存储桶进行交互。
 
 ## continuous query (CQ)
 
 连续查询，一个InfluxQL查询，在数据库中自动地、周期性地运行。连续查询要求在`SELECT`子句中有一个函数（function），并且必须包含一个`GROUP BY time()`子句。
-请参考 [连续查询](/influxdb/v1.8/query_language/continuous_queries/).
+更多信息请参考 [连续查询](/influxdb/v1.8/query_language/continuous_queries/)。
 
 
 相关术语: [function](/influxdb/v1.8/concepts/glossary/#function)
 
 ## database
 
-数据库，用户（user）、保留策略（retention policy）、连续查询（continuous query）和时序数据的逻辑容器。
+数据库，指用户（user）、保留策略（retention policy）、连续查询（continuous query）和时序数据的逻辑容器。
 
 相关术语: [continuous query](/influxdb/v1.8/concepts/glossary/#continuous-query-cq), [retention policy](/influxdb/v1.8/concepts/glossary/#retention-policy-rp), [user](/influxdb/v1.8/concepts/glossary/#user)
 
@@ -47,15 +47,15 @@ menu:
 
 ## field
 
-InfluxDB数据结构中记录元数据和实际数据的key-value对。field是InfluxDB数据结构中必须要有的一部分，并且不会被建索引。如果将field value作为查询的过滤条件的话，那么就必须遍历所选时间范围内的所有数据点，所以，这种方式相对于以tag作为过滤条件的查询，其性能会差很多。
+InfluxDB数据结构中记录元数据和实际数据的键值对。field是InfluxDB数据结构中必须要有的一部分，并且不会被建索引。如果将field value作为查询的过滤条件的话，那么就必须遍历所选时间范围内的所有数据点，所以，这种方式相对于以tag作为过滤条件的查询，其性能会差很多。
 
-**查询提示**：跟field相比，数据库会对tag建索引。
+**查询优化提示**：跟field相比，数据库会对tag建索引。
 
 相关术语: [field key](/influxdb/v1.8/concepts/glossary/#field-key), [field set](/influxdb/v1.8/concepts/glossary/#field-set), [field value](/influxdb/v1.8/concepts/glossary/#field-value), [tag](/influxdb/v1.8/concepts/glossary/#tag)
 
 ## field key
 
-构成field的key-value对里面，关于key的部分。field key是字符串并且存的是元数据（metadata）。
+构成field的键值对里面，关于key的部分。field key是字符串并且存的是元数据（metadata）。
 
 相关术语: [field](/influxdb/v1.8/concepts/glossary/#field), [field set](/influxdb/v1.8/concepts/glossary/#field-set), [field value](/influxdb/v1.8/concepts/glossary/#field-value), [tag key](/influxdb/v1.8/concepts/glossary/#tag-key)
 
@@ -67,17 +67,17 @@ InfluxDB数据结构中记录元数据和实际数据的key-value对。field是I
 
 ## field value
 
-构成field的key-value对里面，关于value的部分。field value是实际数据，可以是字符串、浮点数、整数或者布尔值。一个field value始终和一个时间戳（timestamp）相关联。
+构成field的键值对里面，关于value的部分。field value是实际数据，可以是字符串、浮点数、整数或者布尔值。一个field value始终和一个时间戳（timestamp）相关联。
 
 数据库不会对field value建索引，如果将field value作为查询过滤条件的话，就必须遍历所选时间范围内的所有数据点，所以，这种方式的查询性能并不好。
 
-**查询提示**：跟field value相比，数据库会对tag value建索引。
+**查询优化提示**：跟field value相比，数据库会对tag value建索引。
 
 相关术语: [field](/influxdb/v1.8/concepts/glossary/#field), [field key](/influxdb/v1.8/concepts/glossary/#field-key), [field set](/influxdb/v1.8/concepts/glossary/#field-set), [tag value](/influxdb/v1.8/concepts/glossary/#tag-value), [timestamp](/influxdb/v1.8/concepts/glossary/#timestamp)
 
 ## function
 
-函数，InfluxQL中的聚合（aggregation）、选择（selector）和转换（transformation）。想要获得InfluxQL函数的完整列表，请查看文档[函数](/influxdb/v1.8/query_language/functions/)。
+函数，InfluxQL中的聚合（aggregation）、选择器（selector）和转换（transformation）。想要获得InfluxQL函数的完整列表，请查看文档[函数](/influxdb/v1.8/query_language/functions/)。
 
 相关术语: [aggregation](/influxdb/v1.8/concepts/glossary/#aggregation), [selector](/influxdb/v1.8/concepts/glossary/#selector), [transformation](/influxdb/v1.8/concepts/glossary/#transformation)
 
@@ -105,7 +105,7 @@ InfluxDB数据结构中的一部分，描述了存储在相关field中的数据�
 
 ## metastore
 
-包含了系统状态的内部信息。metastore包括用户（user）信息、数据库（database）、保留策略（retention policy）、shard元数据和连续查询（continuous query）。
+包含了系统状态的内部信息。metastore包括用户（user）信息、数据库（database）、保留策略（retention policy）、shard元数据、连续查询（continuous query）和订阅（subscription）信息。
 
 相关术语: [database](/influxdb/v1.8/concepts/glossary/#database), [retention policy](/influxdb/v1.8/concepts/glossary/#retention-policy-rp), [user](/influxdb/v1.8/concepts/glossary/#user)
 
@@ -123,11 +123,10 @@ InfluxDB数据结构中的一部分，描述了存储在相关field中的数据�
 
 数据点，在InfluxDB中，point表示单个数据记录，类似于SQL数据库表中的行。 每个point：
 
-- 由measurement，一个tag set，一个field key，一个field value和一个timestamp组成
-- 由series和timestame唯一标识。
+- 由一个measurement、一个tag set、一个field key、一个field value和一个timestamp组成。
+- 由series和timestamp唯一标识。
 
-不能在一个series中存储多个带有相同timestame的point。
-如果将timestame写入具有与现有point相匹配的timestame的series，则该field set将成为新旧field set的并集，并且任何联系都将移至新field set。
+您无法在一个series中存储多个带有相同timestamp的point。当您使用与该series中现有点相同的timestamp并尝试将新point写入同一series时，该field set将成为旧field set和新field set的并集，如遇冲突则后面的将覆盖前面的。
 有关重复point的更多信息，请查看[常见问题](/influxdb/v1.8/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points)。
 
 相关术语: [field set](/influxdb/v1.8/concepts/glossary/#field-set), [series](/influxdb/v1.8/concepts/glossary/#series), [timestamp](/influxdb/v1.8/concepts/glossary/#timestamp)
@@ -147,6 +146,7 @@ InfluxDB数据结构中的一部分，描述了存储在相关field中的数据�
 ## replication factor  
 
 复制因子，保留策略（retention policy）的一个属性，决定存储在集群中的数据副本的个数。InfluxDB在`N`个data node上复制数据，其中`N`就是副本个数。
+对于3个或更少的data node，默认的复制因子数等于data node的数量。大于3个的data node，默认的复制因子数为3。如需修改默认的复制因子数，可在retention policy中的replication factor设置。
 
 相关术语: [cluster](/influxdb/v0.10/concepts/glossary/#cluster), [duration](/influxdb/v1.8/concepts/glossary/#duration), [node](/influxdb/v1.8/concepts/glossary/#node),[retention policy](/influxdb/v1.8/concepts/glossary/#retention-policy-rp)
 
@@ -154,7 +154,7 @@ InfluxDB数据结构中的一部分，描述了存储在相关field中的数据�
 
 保留策略，InfluxDB数据结构中的一部分，描述了InfluxDB保存数据的时间（duration）、存储在集群中的数据副本的个数（replication factor）以及shard group覆盖的时间范围（shard group duration）。在每个数据库（database）里面，RP是唯一的，RP、measurement和tag set定义了一个series。
 
-在创建数据库的时候，InfluxDB会自动创建名为`autogen`的RP。
+在创建数据库的时候，InfluxDB会自动创建名为`autogen`的RP，其duration为永远，replication factor为1，shard group的duration为七天。
 如需了解更多，请查看[保留策略管理](/influxdb/v1.8/query_language/manage-database/#retention-policy-management)。
 
 相关术语: [duration](/influxdb/v1.8/concepts/glossary/#duration), [measurement](/influxdb/v1.8/concepts/glossary/#measurement), [replication factor](/influxdb/v1.8/concepts/glossary/#replication-factor), [series](/influxdb/v1.8/concepts/glossary/#series), [shard duration](/influxdb/v1.8/concepts/glossary/#shard-duration), [tag set](/influxdb/v1.8/concepts/glossary/#tag-set)
@@ -167,19 +167,19 @@ InfluxDB数据结构中的一部分，描述了存储在相关field中的数据�
 
 ## selector
 
-选择，一个InfluxQL函数，从特定范围的point中返回一个point。想要获得现有的和即将支持的selector函数的完整列表，请查看文档[InfluxQL函数](/influxdb/v1.8/query_language/functions/#selectors)。
+选择器，一个InfluxQL函数，从特定范围的point中返回一个point。想要获得现有的和即将支持的selector函数的完整列表，请查看文档[InfluxQL函数](/influxdb/v1.8/query_language/functions/#selectors)。
 
 相关术语: [aggregation](/influxdb/v1.8/concepts/glossary/#aggregation), [function](/influxdb/v1.8/concepts/glossary/#function), [transformation](/influxdb/v1.8/concepts/glossary/#transformation)
 
 ## series
 
-系列（序列），InfluxDB数据结构中，有相同measurement、tag set和保留策略（retention policy）的数据集合。
+序列，InfluxDB数据结构中，有相同measurement、tag set和保留策略（retention policy）的数据集合。
 
 相关术语: [field set](/influxdb/v1.8/concepts/glossary/#field-set), [measurement](/influxdb/v1.8/concepts/glossary/#measurement), [tag set](/influxdb/v1.8/concepts/glossary/#tag-set)
 
 ## series cardinality
 
-系列基数，在一个InfluxDB实例中，不同数据库（database）、measurement、tag set和field key的组合的数量。
+序列基数，在一个InfluxDB实例中，不同数据库（database）、measurement、tag set和field key的组合的数量。
 
 例如，假设一个InfluxDB实例有一个数据库和一个measurement，这个measurement有两个tag key：`email`和`status`。如果有三个不同的`email`，并且每个`email`地址关联两个不同的`status`，那么这个measurement的系列基数则为6（3 * 2 = 6）：
 
@@ -229,7 +229,7 @@ h2o_level, location=santa_monica, h2o_feet
 
 ## shard
 
-分片，一个shard包含真实数据和压缩数据，shard由磁盘中的TSM文件表示。每个shard只属于一个shard group，一个shard group可以有多个shard。每个shard包含一组特定的序列（series）。一个给定的shard group中的一个序列中的所有point都存储在磁盘中相同的shard（TSM文件）。
+分片，一个shard包含真实数据和压缩数据，shard由磁盘中的TSM文件表示。每个shard只属于一个shard group。一个shard group可以有多个shard。每个shard包含一组特定的序列（series）。一个给定的shard group中的一个序列中的所有point都存储在磁盘中相同的shard（TSM文件）。
 
 相关术语: [series](/influxdb/v1.8/concepts/glossary/#series), [shard duration](/influxdb/v1.8/concepts/glossary/#shard-duration), [shard group](/influxdb/v1.8/concepts/glossary/#shard-group), [tsm](/influxdb/v1.8/concepts/glossary/#tsm-time-structured-merge-tree)
 
@@ -254,14 +254,14 @@ shard group是shard的逻辑容器，按时间和RP组织。每个包含数据�
 
 ## tag
 
-InfluxDB数据结构中记录元数据的key-value对，tag在InfluxDB数据结构中是可选的。但是，用它们来存储经常被查询的元数据是非常有用的；因为数据库会对tag建索引，所以tag上的查询性能很高。
+InfluxDB数据结构中记录元数据的键值对，tag在InfluxDB数据结构中是可选的。但是，用它们来存储经常被查询的元数据是非常有用的，因为数据库会对tag建索引，所以tag上的查询性能很高。
 **查询提示**：跟tag相比，数据库不会对field建索引。
 
 相关术语: [field](/influxdb/v1.8/concepts/glossary/#field), [tag key](/influxdb/v1.8/concepts/glossary/#tag-key), [tag set](/influxdb/v1.8/concepts/glossary/#tag-set), [tag value](/influxdb/v1.8/concepts/glossary/#tag-value)
 
 ## tag key
 
-构成tag的key-value对里面，关于key的部分。tag key是字符串并且存的是元数据。因为数据库会对tag key建索引，所以tag key上的查询性能很高。
+构成tag的键值对中，关于key的部分。tag key是字符串并且存的是元数据。因为数据库会对tag key建索引，所以tag key上的查询性能很高。
 
 **查询提示**：跟tag key相比，数据库不会对field key建索引。
 
@@ -275,7 +275,7 @@ InfluxDB数据结构中记录元数据的key-value对，tag在InfluxDB数据结�
 
 ## tag value
 
-构成tag的key-value对里面，关于value的部分。tag value是字符串并且存的是元数据。因为数据库会对tag value建索引，所以tag value上的查询性能很高。
+构成tag的键值对中，关于value的部分。tag value是字符串并且存的是元数据。因为数据库会对tag value建索引，所以tag value上的查询性能很高。
 
 
 相关术语: [tag](/influxdb/v1.8/concepts/glossary/#tag), [tag key](/influxdb/v1.8/concepts/glossary/#tag-key), [tag set](/influxdb/v1.8/concepts/glossary/#tag-set)
@@ -303,10 +303,10 @@ InfluxDB的专用数据存储格式。跟现有的B+树或LSM树实现相比，T
 InfluxDB中有两种类型的用户：
 
 * **admin**用户对所有数据库都有`READ`和`WRITE`权限，并且有管理查询和管理用户的全部权限。
-* **non-admin**用户有针对数据库的`READ`、`WRITE`、或者`ALL`（包含`READ`和`WRITE`）的权限
+* **non-admin**用户有针对数据库的`READ`、`WRITE`、或者`ALL`（包含`READ`和`WRITE`）的权限。
 
-启用身份认证后，InfluxDB仅执行使用有效的用户名和密码发送的HTTP请求。
-请参阅[认证和授权](/influxdb/v1.8/administration/authentication_and_authorization/)获取相关信息。
+启用身份验证后，InfluxDB仅执行使用有效的用户名和密码发送的HTTP请求。
+请参阅[身份验证与授权](/influxdb/v1.8/administration/authentication_and_authorization/)获取相关信息。
 
 ## values per second
 

@@ -50,7 +50,7 @@ InfluxQL提供一整套的数据库管理命令
 
 想要获得更多使用InfluxDB API的信息，请参阅 [查询数据](/influxdb/v1.8/guides/querying_data/)。
 
-> **注意：**启用身份认证后，只有管理员用户才能执行此页面上列出的大多数命令。有关更多信息，请参见[认证和授权](/influxdb/v1.8/administration/authentication_and_authorization/)中的文档。
+> **注意：**启用身份验证后，只有管理员用户才能执行此页面上列出的大多数命令。有关更多信息，请参见[身份验证与授权](/influxdb/v1.8/administration/authentication_and_authorization/)中的文档。
 
 ## 数据库管理
 

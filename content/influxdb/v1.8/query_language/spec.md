@@ -29,7 +29,7 @@ Influx查询语言（InfluxQL）的定义和详细信息，包括：
 * [探索数据](/influxdb/v1.8/query_language/explore-data/)
 * [探索架构](/influxdb/v1.8/query_language/explore-schema/)
 * [数据库管理](/influxdb/v1.8/query_language/manage-database/)
-* [认证与授权](/influxdb/v1.8/administration/authentication_and_authorization/)
+* [身份验证与授权](/influxdb/v1.8/administration/authentication_and_authorization/)
 
 InfluxQL是一种类SQL的查询语言，用于与InfluxDB进行交互并提供专门用于存储和分析时序数据的功能。
 

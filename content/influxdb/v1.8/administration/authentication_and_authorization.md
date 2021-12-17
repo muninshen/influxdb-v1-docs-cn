@@ -1,18 +1,18 @@
 ---
-title: InfluxDB 中的身份认证和授权
+title: InfluxDB 中的身份验证与授权
 description: Set up and manage authentication and authorization in InfluxDB OSS.
 aliases:
     - influxdb/v1.8/administration/authentication_and_authorization/
 menu:
   influxdb_1_8:
-    name: 身份认证和授权
+    name: 身份验证与授权
     weight: 20
     parent: 管理
 ---
 
-本文当介绍在Influxdb中设置和管理身份验证和授权
+本文当介绍在Influxdb中设置和管理身份验证与授权
 
-- [认证方式](#authentication)
+- [验证方式](#authentication)
   - [设置身份验证](#set-up-authentication")
   - [验证请求](#authenticate-requests)
 - [授权](#authorization)
@@ -20,9 +20,9 @@ menu:
   - [用户管理命令](#user-management-commands)
 - [HTTP 错误](#authentication-and-authorization-http-errors)
 
-> **Note:** 不应该以身份验证和授权来防止访问并保护数据免受恶意行为者的侵害，如果需要其他安全性或者合规性功能，则Influxdb应该在第三方服务之后运行。如果将Influxdb部署在可公开访问的端点上，强烈建议启用身份验证，否则，任何未经身份验证的用户都可以访问并获得数据
+> **Note:** 不应该以身份验证与授权来防止访问并保护数据免受恶意行为者的侵害，如果需要其他安全性或者合规性功能，则Influxdb应该在第三方服务之后运行。如果将Influxdb部署在可公开访问的端点上，强烈建议启用身份验证，否则，任何未经身份验证的用户都可以访问并获得数据
 
-## 认证方式
+## 验证方式
 
 Influxdb API和使用API连接到数据库的命令行界面（CLI）包括基本用户凭证的简单内置身份验证后，启用身份验证后，Influxdb仅执行使用有效凭据发送的HTTP请求.
 
@@ -464,7 +464,7 @@ CLI example:
 >
 ```
 
-## 身份验证和授权HTTP错误
+## 身份验证与授权HTTP错误
 
 没有身份验证凭据或者凭据不正确的将产生`HTTP 401 Unauthorized`响应
 
