@@ -8,12 +8,12 @@ menu:
     parent: 概念
 ---
 
-每个InfluxDB用例都是独一无二的，schema恰恰将反映出这种独特性。通常来讲，提前为查询优化设计的schema将使得查询更加简单及高校。我们建议参考下述最佳实践：
+每个InfluxDB用例都是独一无二的，schema（模式）恰恰将反映出这种独特性。通常来讲，提前为查询优化设计的schema将使得查询更加简单及高校。我们建议参考下述最佳实践：
 
 - [如何存储数据（tag及field）](#where-to-store-data-tag-or-field)
 - [避免过多的序列series](#avoid-too-many-series)
 - [使用推荐的命名规范](#use-recommended-naming-conventions)
-- [合理的分片组持续期管理](#shard-group-duration-management)
+- [合理的分片组持续时间管理](#shard-group-duration-management)
 
 ## Where to store data (tag or field)
 如何存储数据（tag及field）| 哪些情况下使用tag？哪些情况下使用field？
@@ -192,46 +192,57 @@ from(bucket:"<database>/<retention_policy>")
 > SELECT mean("temp") FROM "weather_sensor" WHERE region = 'north'
 ```
 
-
-
-
-
-
 ## Shard group duration management
-合理的分片组持续期管理
+合理的分片组持续时间管理
 
-\##碎片组持续时间管理
+### 分片组持续时间概述 
 
- ###碎片组持续时间概述 
+InfluxDB将数据存储在分片组中。每个分片组由[保留策略](/influxdb/v1.8/concepts/glossary/#retention-policy-rp)(RP)管理，并存储具有特定时间间隔内的时间戳的数据。该时间间隔的长度称为该分片组的[分片持续时间](/influxdb/v1.8/concepts/glossary/#shard-duration)。
 
-InfluxDB将数据存储在碎片组中。 分片组按[保留策略](/influx db/v 1.8/concepts/glossary/# retention-policy-RP)(RP)进行组织，并存储带有时间戳的数据，这些时间戳位于称为[分片持续时间](/influx db/v 1.8/concepts/glossary/#分片持续时间)的特定时间间隔内。 如果没有提供分片组持续时间，分片组持续时间由创建RP时的RP[持续时间](/influx db/v 1.8/concepts/glossary/# duration)决定。默认值为:
+如果没有提供分片组持续时间，分片组持续时间由创建RP时的[持续时间](/influxdb/v1.8/concepts/glossary/#duration)决定。默认值为:
 
-| RP Duration  | Shard Group Duration  |
+| RP Duration  保留策略的持续时间 | Shard Group Duration 分片组的持续时间  |
 |---|---|
-| < 2 days  | 1 hour  |
-| >= 2 days and <= 6 months  | 1 day  |
-| > 6 months  | 7 days  |
+| < 2 days （小于2天） | 1 hour （1小时）  |
+| >= 2 days and <= 6 months （2天至6个月） | 1 day （1天）  |
+| > 6 months （大于6个月） | 7 days （7天）  |
 
-碎片组的持续时间也可以根据RP进行配置。
+分片组的持续时间也可以根据RP进行配置。要配置分片组持续时间，请参见[保留策略管理](/influxdb/v1.8/query_language/manage-database/#retention-policy-management)。
 
- 要配置碎片组持续时间，请参见[保留策略管理](/influx db/v 1.8/query _ language/manage-database/# Retention-Policy-Management)。
+### 分片组持续时间的权衡 
+确定最佳分片组持续时间需要在以下各项之间找到平衡: 
+- 较长的分片组持续时间将带来更好的整体性能 
+- 较短的分片组持续时间将提供灵活性 
 
- ###碎片组持续时间权衡 确定最佳碎片组持续时间需要在以下各项之间找到平衡: -更长的碎片带来更好的整体性能 -较短的碎片提供了灵活性 
+#### 较长的分片组持续时间
+较长的分片组持续时间允许InfluxDB在同一逻辑位置存储更多数据。这减少了数据重复，提高了压缩效率，并在某些情况下提高了查询速度。
 
-####长碎片组持续时间 更长的碎片组持续时间允许InfluxDB在同一逻辑位置存储更多数据。 这减少了数据重复，提高了压缩效率，并在某些情况下提高了查询速度。
+#### 较短的分片组持续时间
+较短的分片组持续时间允许系统更有效地删除数据和记录增量备份。当一个RP在InfluxDB生效时，它会丢弃整个分片组，而不是单个数据点，即使这些点早于RP持续时间。只有当分片组的持续时间的*结束时间*早于RP的持续时间时，分片组才会被删除。
 
- ####碎片组持续时间短 更短的碎片组持续时间允许系统更有效地删除数据和记录增量备份。 当InfluxDB强制实施一个RP时，它会丢弃整个碎片组，而不是单个数据点，即使这些点早于RP持续时间。 只有当碎片组的持续时间*结束时间*早于RP持续时间时，碎片组才会被删除。 例如，如果您的RP持续时间为一天，InfluxDB将每小时丢弃一小时的数据，并且始终有25个碎片组。一天中每一小时一个，还有一个额外的碎片组部分过期，但直到整个碎片组超过24小时后才会删除。 > **注意:*要考虑的一个特殊用例:按时间过滤对模式数据(如标签、序列、度量)的查询。例如，如果您想在一小时间隔内过滤模式数据，您必须将碎片组持续时间设置为1h。有关更多信息，请参见[按时间筛选架构数据](/influx db/v 1.8/query _ language/explore-schema/# filter-meta-query-by-time)。 
+例如，如果您的RP持续时间为一天，InfluxDB将每小时丢弃一小时的数据，并且始终有25个分片组。这个25个分片组由一天中每一小时一个以及还有一个额外的待过期的分片组组成。该待过期分片组直到整个分片组超过24小时后才会删除。 
 
-###碎片组持续时间建议 默认的碎片组持续时间在大多数情况下都很有效。但是，高吞吐量或长时间运行的实例将受益于使用更长的碎片组持续时间。 以下是一些延长碎片组持续时间的建议:
+> 说明：以下这种特殊用例需要注意：以时间为过滤器对这些模式数据（如tags、series、measurements）进行查询操作。例如，如果您想在一小时间隔内过滤模式数据，您必须将分片组持续时间设置为1h（即1小时）。有关更多信息，请参见[按时间筛选模式数据](/influxdb/v1.8/query_language/explore-schema/#filter-meta-queries-by-time)。 
 
-| RP Duration  | Shard Group Duration  |
+#### 分片组持续时间建议 
+默认的分片组持续时间在大多数情况下都很有效。但是，高吞吐量或长时间运行的实例将受益于使用更长的分片组持续时间。以下是一些较长分片组持续时间的建议:
+
+| RP Duration 保留策略的持续时间 | Shard Group Duration 分片组的持续时间  |
 |---|---|
-| <= 1 day  | 6 hours  |
-| > 1 day and <= 7 days  | 1 day  |
-| > 7 days and <= 3 months  | 7 days  |
-| > 3 months  | 30 days  |
-| infinite  | 52 weeks or longer  |
+| <= 1 day （小于等于1天） | 6 hours （6小时）  |
+| > 1 day and <= 7 days （1天至7天） | 1 day （1天）  |
+| > 7 days and <= 3 months （7天至3个月） | 7 days （7天） |
+| > 3 months （大约3月） | 30 days （30天） |
+| infinite（无限期）| 52 weeks or longer （52周及更长）  |
 
-> \> **注意:*注意，` INF `(无穷大)不是一个[有效的分片组持续时间](/influx db/v 1.8/query _ language/manage-database/# retention-policy-management)。
->
->  >在极端情况下，数据覆盖几十年并且永远不会被删除，像“1040瓦(20年)”这样的长碎片组持续时间是完全有效的。 设置分片组持续时间之前要考虑的其他因素: *碎片组应该是最频繁查询的最长时间范围的两倍 *每个分片组应包含超过100，000个[点](/influx db/v 1.8/概念/术语表/#点) *碎片组每个[系列]应包含1，000以上的分数(/influx db/v 1.8/概念/术语表/#系列) ####回填的碎片组持续时间 大量插入过去覆盖很大时间范围的历史数据会同时触发大量碎片的创建。 并发访问和写入数百或数千个碎片的开销会很快导致性能下降和内存耗尽。 当写入历史数据时，我们强烈建议临时设置更长的碎片组持续时间，以便创建更少的碎片。通常，52周的碎片组持续时间对于回填来说效果很好。
+>  说明：` INF `(无限期)不是一个[有效的分片组持续时间](/influxdb/v1.8/query_language/manage-database/#retention-policy-management)。在极端情况下，如果数据需要覆盖几十年并且永远不会被删除，类似如“1040w(即20年)”这样的长分片组持续时间是完全有效的。 
+
+设置分片组持续时间其他要考虑的因素还有: 
+- 分片组应该是最频繁查询的最长时间范围的两倍。
+- 每个分片组应包含超过100,000个[点](/influxdb/v1.8/concepts/glossary/#point) 。
+- 每个分片组的每个[序列](/influxdb/v1.8/concepts/glossary/#series)应包含1,000以上的点。
+
+#### 数据补录时建议的分片组持续时间 
+当批量补录较长时间范围的历史数据时，这些补录操作会触发大量分片的创建。并发访问和写入数百或数千个分片的开销会很快导致系统的性能下降和内存耗尽。
+
+当写入历史数据时，我们强烈建议临时设置更长的分片组持续时间，以便创建更少的分片。通常，52周的分片组持续时间对于补录来说效果很好。

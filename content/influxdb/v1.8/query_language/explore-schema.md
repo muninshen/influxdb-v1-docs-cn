@@ -1088,7 +1088,8 @@ all_the_types   boolean
 
 **注意：**`SHOW FIELD KEYS`处理field的类型差异与`SELECT`语句不一样。有关更多信息，请参阅[InfluxDB如何处理各个分片之间的字段类型差异？](/influxdb/v1.8/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-field-type-discrepancies-across-shards)
 
-### 按时间过滤元查询
+### Filter meta queries by time
+按时间过滤元查询
 
 当您按时间过滤元查询时，您可能会看到超出指定时间的结果。元查询结果在分片级别进行过滤，因此结果的粒度与分片组的持续时间大致相同。如果您的时间过滤器跨越多个分片，您将获得所有分片的结果，这些分片在指定的时间范围内。要查看分片上的分片和时间戳，请运行`SHOW SHARDS`。要了解有关分片及其持续时间的更多信息，请参阅[建议的分片组持续时间](/influxdb/v1.8/concepts/schema_and_data_layout/#shard-group-duration-recommendations)。
 
